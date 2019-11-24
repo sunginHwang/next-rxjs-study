@@ -1,6 +1,6 @@
 import React from 'react';
 import {Observable, pipe, range} from 'rxjs';
-import {filter, map} from "rxjs/operators";
+import {filter, find, isEmpty, map} from "rxjs/operators";
 
 const Operators = ({}) => {
 
@@ -14,6 +14,25 @@ const Operators = ({}) => {
     a.subscribe(v => console.log(v));
     console.log('secondCall');
     a.subscribe(v => console.log(v));
+
+    const getRangeObservable = count => range(1, count);
+
+    const subscribeWithIsEmpty = count => {
+        getRangeObservable(count)
+            .pipe(isEmpty())
+            .subscribe(v => console.log(`갯수 : ${count} 값 : ${v}`));
+    };
+
+    const subscribeWithFind = count => {
+        getRangeObservable(count)
+            .pipe(find(c => c > 2))
+            .subscribe(v => console.log(`갯수 : ${count} 값 : ${v}`));
+    };
+
+    subscribeWithIsEmpty(0);
+    subscribeWithIsEmpty(3);
+    subscribeWithFind(1);
+    subscribeWithFind(4);
 
     return (
         <div>
