@@ -1,8 +1,15 @@
 import React from 'react';
 import {Observable, pipe, range} from 'rxjs';
-import {filter, find, isEmpty, map} from "rxjs/operators";
+import {filter, find, isEmpty, map, count} from "rxjs/operators";
 
 const Operators = ({}) => {
+
+    const countFive = range(1, 10)
+        .pipe(
+            count(v => !(v % 2)),
+        );
+    console.log('count');
+    console.log(countFive.subscribe(v => console.log(v)));
 
     const a = range(1, 10)
         .pipe(
