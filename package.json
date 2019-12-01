@@ -1,0 +1,28 @@
+{
+  "name": "next-rxjs-study",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@rematch/core": "^1.2.0",
+    "@types/react-redux": "^7.1.5",
+    "@types/redux": "^3.6.0",
+    "next": "9.1.2",
+    "next-redux-wrapper": "^4.0.1",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-observable": "^1.2.0",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
+    "typescript": "^3.6.4"
+  }
+}
