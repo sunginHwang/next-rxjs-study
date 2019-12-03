@@ -1,6 +1,6 @@
 import React from 'react';
-import {pingInitType} from "../store/reducers/pingReducer";
-import {useSelector} from "react-redux";
+import {pingInitType, changePing} from "../store/reducers/pingReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 
 type rootState = {
@@ -9,11 +9,18 @@ type rootState = {
 
 const Global = ({}) => {
     const ping = useSelector((state: rootState) => state.pingReducer.ping);
+    const dispatch = useDispatch();
+
+    const buttonClick = () => {
+        // @ts-ignore
+        dispatch(changePing());
+    }
+
     console.log(ping);
 
     return (
         <div>
-            <p>{ping}</p>
+            <p onClick={buttonClick}>{ping}</p>
         </div>
     );
 };
