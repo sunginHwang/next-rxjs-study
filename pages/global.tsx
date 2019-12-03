@@ -7,18 +7,19 @@ type rootState = {
     pingReducer: pingInitType
 };
 
-const Redux = ({}) => {
+const Global = ({}) => {
     const ping = useSelector((state: rootState) => state.pingReducer.ping);
+    console.log(ping);
 
     return (
         <div>
-            <p>{{ping}}</p>
+            <p>{ping}</p>
         </div>
     );
 };
 
-Redux.getInitialProps = async ({}) => {
+Global.getInitialProps = async ({}) => {
     return {};
 };
 
-export default Redux;
+export default Global;

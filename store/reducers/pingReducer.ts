@@ -1,12 +1,12 @@
 import { createReducer, createAction } from 'typesafe-actions';
 import {produce} from 'immer';
 
-const prefix: string = 'CATEGORY_';
+const prefix: string = 'PING_';
 
 const PING: string = `${prefix}PING`;
 
 
-export const ping = createAction(PING)<string>();
+export const changePing = createAction(PING)<string>();
 
 export interface pingInitType {
     ping: string;
