@@ -1,6 +1,6 @@
 import React from 'react';
-import {Observable, pipe, range} from 'rxjs';
-import {filter, find, isEmpty, map, count, skip, startWith, endWith} from "rxjs/operators";
+import {Observable, pipe, range, from} from 'rxjs';
+import {filter, find, isEmpty, map, count, skip, startWith, endWith, pluck} from "rxjs/operators";
 
 const Operators = ({}) => {
 
@@ -53,6 +53,23 @@ const Operators = ({}) => {
     subscribeWithIsEmpty(3);
     subscribeWithFind(1);
     subscribeWithFind(4);
+
+    const people = [
+        {
+            name:'성인',
+            age: 34
+        },
+        {
+            name:'혜진',
+            age: 33
+        }
+    ];
+
+    console.log('pluckTest');
+
+    const pluckTest = from(people)
+        .pipe(pluck('name'))
+        .subscribe(v => console.log(v));
 
 
     return (
