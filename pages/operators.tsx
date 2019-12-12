@@ -1,6 +1,7 @@
 import React from 'react';
 import {Observable, pipe, range, from} from 'rxjs';
-import {filter, find, isEmpty, map, count, skip, startWith, endWith, pluck} from "rxjs/operators";
+import {filter, find, isEmpty, map, count, skip, startWith, endWith, pluck, tap, retry} from "rxjs/operators";
+import {error} from "next/dist/build/output/log";
 
 const Operators = ({}) => {
 
@@ -32,7 +33,7 @@ const Operators = ({}) => {
     a.subscribe(v => console.log(v));
     console.log('secondCall');
     a.subscribe(v => console.log(v));
-    setTimeout(()=> a.subscribe(v => console.log(v)),800);
+    setTimeout(() => a.subscribe(v => console.log(v)), 800);
     console.log('test for async case');
 
     const getRangeObservable = count => range(1, count);
@@ -56,20 +57,32 @@ const Operators = ({}) => {
 
     const people = [
         {
-            name:'성인',
+            name: '성인',
             age: 34
         },
         {
-            name:'혜진',
+            name: '혜진',
             age: 33
         }
     ];
 
     console.log('pluckTest');
 
+    let retryCount = 1;
     const pluckTest = from(people)
-        .pipe(pluck('name'))
-        .subscribe(v => console.log(v));
+        .pipe(
+            pluck('name'),
+            tap(a => {
+                console.log('tap - ' + a + ' retryCount : ' + retryCount);
+                retryCount++;
+                throw error();
+            }),
+            retry(3)
+        )
+        .subscribe(
+            v => console.log(v),
+            v => console.log('error 발생 ' + v),
+        );
 
 
     return (
